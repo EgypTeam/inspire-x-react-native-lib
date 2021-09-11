@@ -96,6 +96,17 @@ export class InspireXApi {
 		return oresponse;
 	}
 
+	doFetchReportTotalDeVendasDoDia() {
+		const response = await fetch(this.address + '/api/view/vnd/padrao/totalvendasdia', {
+			method: 'GET',
+			headers: {
+				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+			}
+		});
+		const oresponse = await response.json();
+		return oresponse;
+	}
+
 	getLoginResponse() {
 		return this.ologinresponse;
 	}
