@@ -1,3 +1,3 @@
-import InspireXApi from './src/InspireXApi.js';
-export {InspireXApi};
+import { InspireXApi, doLogin, serializeParams } from './src/InspireXApi.js';
+export { InspireXApi, doLogin, serializeParams };
 

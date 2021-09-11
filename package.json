@@ -1,0 +1,19 @@
+{
+  "name": "inspire-x-react-native-lib",
+  "version": "1.0.1",
+  "description": "Inspire X React Native Library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EgypTeam/inspire-x-react-native-lib.git"
+  },
+  "author": "Pedro Ferreira",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EgypTeam/inspire-x-react-native-lib/issues"
+  },
+  "homepage": "https://github.com/EgypTeam/inspire-x-react-native-lib#readme"
+}
