@@ -96,7 +96,7 @@ export class InspireXApi {
 		return oresponse;
 	}
 
-	doFetchReportTotalDeVendasDoDia() {
+	async doFetchReportTotalDeVendasDoDia() {
 		const response = await fetch(this.address + '/api/view/vnd/padrao/totalvendasdia', {
 			method: 'GET',
 			headers: {
