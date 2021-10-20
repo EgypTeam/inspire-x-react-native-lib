@@ -96,6 +96,17 @@ export class InspireXApi {
 		return oresponse;
 	}
 
+	async doGetParFaturamento(filial_par, codigo) {
+		const response = await fetch(this.address + '/api/par/faturamentos/' + filial_par + '/' + codigo, {
+			method: 'GET',
+			headers: {
+				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+			}
+		});
+		const oresponse = await response.json();
+		return oresponse;
+	}
+
 	async doFetchReportTotalDeVendasDoDia(dia) {
 		const response = await fetch(this.address + '/api/view/vnd/padrao/totalvendasdia' + (dia == null ? '' : '/' + dia), {
 			method: 'GET',
