@@ -107,6 +107,17 @@ export class InspireXApi {
 		return oresponse;
 	}
 
+	async doGetBasAlmoxarifado(filial, codigo) {
+		const response = await fetch(this.address + '/api/bas/almoxarifados/' + filial + '/' + codigo, {
+			method: 'GET',
+			headers: {
+				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+			}
+		});
+		const oresponse = await response.json();
+		return oresponse;
+	}
+
 	async doFetchReportTotalDeVendasDoDia(dia) {
 		const response = await fetch(this.address + '/api/view/vnd/padrao/totalvendasdia' + (dia == null ? '' : '/' + dia), {
 			method: 'GET',
