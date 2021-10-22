@@ -129,7 +129,7 @@ export class InspireXApi {
 		return oresponse;
 	}
 
-	async doGetBasTipoMmov(codigo) {
+	async doGetBasTipoMov(codigo) {
 		const response = await fetch(this.address + '/api/bas/tipomovs/' + codigo, {
 			method: 'GET',
 			headers: {
