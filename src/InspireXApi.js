@@ -138,9 +138,43 @@ export class InspireXApi {
 		if (squeryparams != '') {
 			squeryparams = '?' + squeryparams;
 		}
-		//console.log(squeryparams);
-		//const response = await fetch(INSPIRE_API_CONSTS.address + '/api/pro/produtos' + squeryparams, {
 		const response = await fetch(this.address + '/api/bas/filiais' + squeryparams, {
+			method: 'GET',
+			headers: {
+				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+			}
+		});
+		const oresponse = await response.json();
+		return oresponse;
+	}
+
+	async doGetBasFilial(codigo) {
+		const response = await fetch(this.address + '/api/bas/filiais/' + codigo, {
+			method: 'GET',
+			headers: {
+				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+			}
+		});
+		const oresponse = await response.json();
+		return oresponse;
+	}
+
+	async doSearchParFaturamento(search = '', page = null, per_page = null) {
+		var aqueryparams = [];
+		if (page != null) {
+			aqueryparams.push('page=' + page);
+		}
+		if (per_page != null) {
+			aqueryparams.push('per_page=' + per_page)
+		}
+		if (search != null && search != '') {
+			aqueryparams.push('search=' + search);
+		}
+		var squeryparams = aqueryparams.join('&');
+		if (squeryparams != '') {
+			squeryparams = '?' + squeryparams;
+		}
+		const response = await fetch(this.address + '/api/par/faturamentos' + squeryparams, {
 			method: 'GET',
 			headers: {
 				'Authorization': 'Bearer ' + this.ologinresponse.access_token
@@ -161,8 +195,60 @@ export class InspireXApi {
 		return oresponse;
 	}
 
+	async doSearchBasAlmoxarifado(search = '', page = null, per_page = null) {
+		var aqueryparams = [];
+		if (page != null) {
+			aqueryparams.push('page=' + page);
+		}
+		if (per_page != null) {
+			aqueryparams.push('per_page=' + per_page)
+		}
+		if (search != null && search != '') {
+			aqueryparams.push('search=' + search);
+		}
+		var squeryparams = aqueryparams.join('&');
+		if (squeryparams != '') {
+			squeryparams = '?' + squeryparams;
+		}
+		const response = await fetch(this.address + '/api/bas/almoxarifados' + squeryparams, {
+			method: 'GET',
+			headers: {
+				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+			}
+		});
+		const oresponse = await response.json();
+		return oresponse;
+	}
+
 	async doGetBasAlmoxarifado(filial, codigo) {
 		const response = await fetch(this.address + '/api/bas/almoxarifados/' + filial + '/' + codigo, {
+			method: 'GET',
+			headers: {
+				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+			}
+		});
+		const oresponse = await response.json();
+		return oresponse;
+	}
+
+	async doSearchParEstoque(search = '', page = null, per_page = null) {
+		var aqueryparams = [];
+		if (page != null) {
+			aqueryparams.push('page=' + page);
+		}
+		if (per_page != null) {
+			aqueryparams.push('per_page=' + per_page)
+		}
+		if (search != null && search != '') {
+			aqueryparams.push('search=' + search);
+		}
+		var squeryparams = aqueryparams.join('&');
+		if (squeryparams != '') {
+			squeryparams = '?' + squeryparams;
+		}
+		//console.log(squeryparams);
+		//const response = await fetch(INSPIRE_API_CONSTS.address + '/api/pro/produtos' + squeryparams, {
+		const response = await fetch(this.address + '/api/par/estoques' + squeryparams, {
 			method: 'GET',
 			headers: {
 				'Authorization': 'Bearer ' + this.ologinresponse.access_token
@@ -183,8 +269,22 @@ export class InspireXApi {
 		return oresponse;
 	}
 
-	async doGetBasTipoMov(codigo) {
-		const response = await fetch(this.address + '/api/bas/tipomovs/' + codigo, {
+	async doSearchBasTipoMov(search = '', page = null, per_page = null) {
+		var aqueryparams = [];
+		if (page != null) {
+			aqueryparams.push('page=' + page);
+		}
+		if (per_page != null) {
+			aqueryparams.push('per_page=' + per_page)
+		}
+		if (search != null && search != '') {
+			aqueryparams.push('search=' + search);
+		}
+		var squeryparams = aqueryparams.join('&');
+		if (squeryparams != '') {
+			squeryparams = '?' + squeryparams;
+		}
+		const response = await fetch(this.address + '/api/bas/tipomovs' + squeryparams, {
 			method: 'GET',
 			headers: {
 				'Authorization': 'Bearer ' + this.ologinresponse.access_token
@@ -194,8 +294,8 @@ export class InspireXApi {
 		return oresponse;
 	}
 
-	async doGetBasFilial(codigo) {
-		const response = await fetch(this.address + '/api/bas/filiais/' + codigo, {
+	async doGetBasTipoMov(codigo) {
+		const response = await fetch(this.address + '/api/bas/tipomovs/' + codigo, {
 			method: 'GET',
 			headers: {
 				'Authorization': 'Bearer ' + this.ologinresponse.access_token
