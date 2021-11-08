@@ -220,6 +220,31 @@ export class InspireXApi {
 		return oresponse;
 	}
 
+	async doSearchBasAlmoxarifadoByFilial(filial = 1, search = '', page = null, per_page = null) {
+		var aqueryparams = [];
+		if (page != null) {
+			aqueryparams.push('page=' + page);
+		}
+		if (per_page != null) {
+			aqueryparams.push('per_page=' + per_page)
+		}
+		if (search != null && search != '') {
+			aqueryparams.push('search=' + search);
+		}
+		var squeryparams = aqueryparams.join('&');
+		if (squeryparams != '') {
+			squeryparams = '?' + squeryparams;
+		}
+		const response = await fetch(this.address + '/api/bas/almoxarifados/' + filial + squeryparams, {
+			method: 'GET',
+			headers: {
+				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+			}
+		});
+		const oresponse = await response.json();
+		return oresponse;
+	}
+
 	async doGetBasAlmoxarifado(filial, codigo) {
 		const response = await fetch(this.address + '/api/bas/almoxarifados/' + filial + '/' + codigo, {
 			method: 'GET',
