@@ -330,6 +330,89 @@ export class InspireXApi {
 		return oresponse;
 	}
 
+	async doSearchStqLoteSequencia(search = '', page = null, per_page = null) {
+		var aqueryparams = [];
+		if (page != null) {
+			aqueryparams.push('page=' + page);
+		}
+		if (per_page != null) {
+			aqueryparams.push('per_page=' + per_page)
+		}
+		if (search != null && search != '') {
+			aqueryparams.push('search=' + search);
+		}
+		var squeryparams = aqueryparams.join('&');
+		if (squeryparams != '') {
+			squeryparams = '?' + squeryparams;
+		}
+		const response = await fetch(this.address + '/api/stq/lote/sequencias' + squeryparams, {
+			method: 'GET',
+			headers: {
+				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+			}
+		});
+		const oresponse = await response.json();
+		return oresponse;
+	}
+
+	async doGetStqLoteSequencia(filial, sequencia) {
+		const response = await fetch(this.address + '/api/stq/lote/sequencias/' + filial + '/' + sequencia, {
+			method: 'GET',
+			headers: {
+				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+			}
+		});
+		const oresponse = await response.json();
+		return oresponse;
+	}
+
+	async doSearchStqSaldoEstoque(search = '', page = null, per_page = null) {
+		var aqueryparams = [];
+		if (page != null) {
+			aqueryparams.push('page=' + page);
+		}
+		if (per_page != null) {
+			aqueryparams.push('per_page=' + per_page)
+		}
+		if (search != null && search != '') {
+			aqueryparams.push('search=' + search);
+		}
+		var squeryparams = aqueryparams.join('&');
+		if (squeryparams != '') {
+			squeryparams = '?' + squeryparams;
+		}
+		const response = await fetch(this.address + '/api/stq/saldo/estoques' + squeryparams, {
+			method: 'GET',
+			headers: {
+				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+			}
+		});
+		const oresponse = await response.json();
+		return oresponse;
+	}
+
+	async doGetStqSaldoEstoque(filial_stq, almoxarifado, filial_pro, produto, data, sequencia_lote) {
+		const response = await fetch(this.address + '/api/stq/saldo/estoques/' + filial_stq + '/' + almoxarifado + '/' + filial_pro + '/' + produto + '/' + data + '/' + sequencia_lote, {
+			method: 'GET',
+			headers: {
+				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+			}
+		});
+		const oresponse = await response.json();
+		return oresponse;
+	}
+
+	async doFnc_fnc_buca_preco_medio_s_icms_data(var_filial_stq, var_filial_pro, var_produto, var_almoxarifado, data_saldo, var_seq_lote) {
+		const response = await fetch(this.address + '/api/fnc/fnc_busca_preco_medio_s_icms_data/' + var_filial_stq + '/' + var_filial_pro + '/' + var_produto + '/' + var_almoxarifado + '/' + data_saldo + '/' + var_seq_lote, {
+			method: 'GET',
+			headers: {
+				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+			}
+		});
+		const oresponse = await response.json();
+		return oresponse;
+	}
+
 	async doFetchReportTotalDeVendasDoDia(dia) {
 		const response = await fetch(this.address + '/api/view/vnd/padrao/totalvendasdia' + (dia == null ? '' : '/' + dia), {
 			method: 'GET',
