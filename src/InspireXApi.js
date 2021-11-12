@@ -402,6 +402,42 @@ export class InspireXApi {
 		return oresponse;
 	}
 
+	async doSearchStqSaldoEstoqueAtual(search = '', page = null, per_page = null) {
+		var aqueryparams = [];
+		if (page != null) {
+			aqueryparams.push('page=' + page);
+		}
+		if (per_page != null) {
+			aqueryparams.push('per_page=' + per_page)
+		}
+		if (search != null && search != '') {
+			aqueryparams.push('search=' + search);
+		}
+		var squeryparams = aqueryparams.join('&');
+		if (squeryparams != '') {
+			squeryparams = '?' + squeryparams;
+		}
+		const response = await fetch(this.address + '/api/stq/saldo/estoque/atuais' + squeryparams, {
+			method: 'GET',
+			headers: {
+				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+			}
+		});
+		const oresponse = await response.json();
+		return oresponse;
+	}
+
+	async doGetStqSaldoEstoqueAtual(filial_stq, almoxarifado, filial_pro, produto, sequencia_lote) {
+		const response = await fetch(this.address + '/api/stq/saldo/estoque/atuais/' + filial_stq + '/' + almoxarifado + '/' + filial_pro + '/' + produto + '/' + sequencia_lote, {
+			method: 'GET',
+			headers: {
+				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+			}
+		});
+		const oresponse = await response.json();
+		return oresponse;
+	}
+
 	async doFnc_fnc_buca_preco_medio_s_icms_data(var_filial_stq, var_filial_pro, var_produto, var_almoxarifado, data_saldo, var_seq_lote) {
 		const response = await fetch(this.address + '/api/fnc/fnc_busca_preco_medio_s_icms_data/' + var_filial_stq + '/' + var_filial_pro + '/' + var_produto + '/' + var_almoxarifado + '/' + data_saldo + '/' + var_seq_lote, {
 			method: 'GET',
