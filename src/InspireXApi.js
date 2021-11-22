@@ -438,7 +438,54 @@ export class InspireXApi {
 		return oresponse;
 	}
 
-	async doFnc_fnc_buca_preco_medio_s_icms_data(var_filial_stq, var_filial_pro, var_produto, var_almoxarifado, data_saldo, var_seq_lote) {
+	async doSearchStqMovEstoque(search = '', page = null, per_page = null) {
+		var aqueryparams = [];
+		if (page != null) {
+			aqueryparams.push('page=' + page);
+		}
+		if (per_page != null) {
+			aqueryparams.push('per_page=' + per_page)
+		}
+		if (search != null && search != '') {
+			aqueryparams.push('search=' + search);
+		}
+		var squeryparams = aqueryparams.join('&');
+		if (squeryparams != '') {
+			squeryparams = '?' + squeryparams;
+		}
+		const response = await fetch(this.address + '/api/stq/mov/estoques' + squeryparams, {
+			method: 'GET',
+			headers: {
+				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+			}
+		});
+		const oresponse = await response.json();
+		return oresponse;
+	}
+
+	async doGetStqMovEstoque(filial_mov, sequencial) {
+		const response = await fetch(this.address + '/api/stq/mov/estoques/' + filial_mov + '/' + sequencial, {
+			method: 'GET',
+			headers: {
+				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+			}
+		});
+		const oresponse = await response.json();
+		return oresponse;
+	}
+
+	async doInventarioProdutoStqMovEstoque(filial_mov, filial_pro, produto, almox_origem, sequencia_lote, data_movimento, hora_movimento, novo_saldo) {
+		const response = await fetch(this.address + '/api/stq/mov/estoques/inventario/produto/' + filial_mov + '/' + filial_pro + '/' + produto + '/' + almox_origem + '/' + sequencia_lote + '/' + data_movimento + '/' + hora_movimento + '/' + novo_saldo, {
+			method: 'POST',
+			headers: {
+				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+			}
+		});
+		const oresponse = await response.json();
+		return oresponse;
+	}
+
+	async doFnc_fnc_busca_preco_medio_s_icms_data(var_filial_stq, var_filial_pro, var_produto, var_almoxarifado, data_saldo, var_seq_lote) {
 		const response = await fetch(this.address + '/api/fnc/fnc_busca_preco_medio_s_icms_data/' + var_filial_stq + '/' + var_filial_pro + '/' + var_produto + '/' + var_almoxarifado + '/' + data_saldo + '/' + var_seq_lote, {
 			method: 'GET',
 			headers: {
