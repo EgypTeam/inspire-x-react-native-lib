@@ -485,6 +485,17 @@ export class InspireXApi {
 		return oresponse;
 	}
 
+	async doInventarioNowProdutoStqMovEstoque(filial_mov, filial_pro, produto, almox_origem, sequencia_lote, novo_saldo) {
+		const response = await fetch(this.address + '/api/stq/mov/estoques/inventario/produto/' + filial_mov + '/' + filial_pro + '/' + produto + '/' + almox_origem + '/' + sequencia_lote + '/' + novo_saldo, {
+			method: 'POST',
+			headers: {
+				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+			}
+		});
+		const oresponse = await response.json();
+		return oresponse;
+	}
+
 	async doFnc_fnc_busca_preco_medio_s_icms_data(var_filial_stq, var_filial_pro, var_produto, var_almoxarifado, data_saldo, var_seq_lote) {
 		const response = await fetch(this.address + '/api/fnc/fnc_busca_preco_medio_s_icms_data/' + var_filial_stq + '/' + var_filial_pro + '/' + var_produto + '/' + var_almoxarifado + '/' + data_saldo + '/' + var_seq_lote, {
 			method: 'GET',
