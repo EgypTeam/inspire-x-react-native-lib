@@ -485,7 +485,7 @@ export class InspireXApi {
 		return oresponse;
 	}
 
-	async doInventarioNowProdutoStqMovEstoque(filial_mov, filial_pro, produto, almox_origem, sequencia_lote, novo_saldo) {
+	async doInventarioProdutoNowStqMovEstoque(filial_mov, filial_pro, produto, almox_origem, sequencia_lote, novo_saldo) {
 		const response = await fetch(this.address + '/api/stq/mov/estoques/inventario/produto/' + filial_mov + '/' + filial_pro + '/' + produto + '/' + almox_origem + '/' + sequencia_lote + '/' + novo_saldo, {
 			method: 'POST',
 			headers: {
