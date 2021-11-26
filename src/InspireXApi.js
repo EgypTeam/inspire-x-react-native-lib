@@ -69,6 +69,20 @@ export class InspireXApi {
 		}
 	}
 
+	async doPasswordRequest(email) {
+		const response = await fetch(this.address + '/api/password/requests', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				email: email
+			})
+		});
+		const oresponse = await response.json();
+		return oresponse;
+	}
+
 	async doFetchProdutos(search = '', page = null, per_page = null) {
 		var aqueryparams = [];
 		if (page != null) {
