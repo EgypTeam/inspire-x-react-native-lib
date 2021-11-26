@@ -15,6 +15,10 @@ export class InspireXApi {
 		this.address = address;
 	}
 
+	async doHello() {
+		return "Hello, World!";
+	}
+
 	async doLogin(username, password) {
 
 		var client_id = '';
