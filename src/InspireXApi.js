@@ -74,17 +74,24 @@ export class InspireXApi {
 	}
 
 	async doPasswordRequest(email) {
-		const response = await fetch(this.address + '/api/password/requests', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				email: email
-			})
-		});
-		const oresponse = await response.json();
-		return oresponse;
+		try {
+			const response = await fetch(this.address + '/api/password/requests', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					email: email
+				})
+			});
+			if (!response.ok) {
+				throw new Error(await response.text());
+			}
+			const oresponse = await response.json();
+			return oresponse;
+		} catch (e) {
+			throw new Error(e.message);
+		}
 	}
 
 	async doFetchProdutos(search = '', page = null, per_page = null) {
@@ -104,14 +111,21 @@ export class InspireXApi {
 		}
 		//console.log(squeryparams);
 		//const response = await fetch(INSPIRE_API_CONSTS.address + '/api/pro/produtos' + squeryparams, {
-		const response = await fetch(this.address + '/api/pro/produtos' + squeryparams, {
-			method: 'GET',
-			headers: {
-				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+		try {
+			const response = await fetch(this.address + '/api/pro/produtos' + squeryparams, {
+				method: 'GET',
+				headers: {
+					'Authorization': 'Bearer ' + this.ologinresponse.access_token
+				}
+			});
+			if (!response.ok) {
+				throw new Error(await response.text());
 			}
-		});
-		const oresponse = await response.json();
-		return oresponse;
+			const oresponse = await response.json();
+			return oresponse;
+		} catch (e) {
+			throw new Error(e.message);
+		}
 	}
 
 	async doSearchProProduto(search = '', page = null, per_page = null) {
@@ -129,16 +143,23 @@ export class InspireXApi {
 		if (squeryparams != '') {
 			squeryparams = '?' + squeryparams;
 		}
-		//console.log(squeryparams);
-		//const response = await fetch(INSPIRE_API_CONSTS.address + '/api/pro/produtos' + squeryparams, {
-		const response = await fetch(this.address + '/api/pro/produtos' + squeryparams, {
-			method: 'GET',
-			headers: {
-				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+		try {
+			//console.log(squeryparams);
+			//const response = await fetch(INSPIRE_API_CONSTS.address + '/api/pro/produtos' + squeryparams, {
+			const response = await fetch(this.address + '/api/pro/produtos' + squeryparams, {
+				method: 'GET',
+				headers: {
+					'Authorization': 'Bearer ' + this.ologinresponse.access_token
+				}
+			});
+			if (!response.ok) {
+				throw new Error(await response.text());
 			}
-		});
-		const oresponse = await response.json();
-		return oresponse;
+			const oresponse = await response.json();
+			return oresponse;
+		} catch (e) {
+			throw new Error(e.message);
+		}
 	}
 
 	async doSearchBasFilial(search = '', page = null, per_page = null) {
@@ -156,25 +177,39 @@ export class InspireXApi {
 		if (squeryparams != '') {
 			squeryparams = '?' + squeryparams;
 		}
-		const response = await fetch(this.address + '/api/bas/filiais' + squeryparams, {
-			method: 'GET',
-			headers: {
-				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+		try {
+			const response = await fetch(this.address + '/api/bas/filiais' + squeryparams, {
+				method: 'GET',
+				headers: {
+					'Authorization': 'Bearer ' + this.ologinresponse.access_token
+				}
+			});
+			if (!response.ok) {
+				throw new Error(await response.text());
 			}
-		});
-		const oresponse = await response.json();
-		return oresponse;
+			const oresponse = await response.json();
+			return oresponse;
+		} catch (e) {
+			throw new Error(e.message);
+		}
 	}
 
 	async doGetBasFilial(codigo) {
-		const response = await fetch(this.address + '/api/bas/filiais/' + codigo, {
-			method: 'GET',
-			headers: {
-				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+		try {
+			const response = await fetch(this.address + '/api/bas/filiais/' + codigo, {
+				method: 'GET',
+				headers: {
+					'Authorization': 'Bearer ' + this.ologinresponse.access_token
+				}
+			});
+			if (!response.ok) {
+				throw new Error(await response.text());
 			}
-		});
-		const oresponse = await response.json();
-		return oresponse;
+			const oresponse = await response.json();
+			return oresponse;
+		} catch (e) {
+			throw new Error(e.message);
+		}
 	}
 
 	async doSearchParFaturamento(search = '', page = null, per_page = null) {
@@ -192,25 +227,39 @@ export class InspireXApi {
 		if (squeryparams != '') {
 			squeryparams = '?' + squeryparams;
 		}
-		const response = await fetch(this.address + '/api/par/faturamentos' + squeryparams, {
-			method: 'GET',
-			headers: {
-				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+		try {
+			const response = await fetch(this.address + '/api/par/faturamentos' + squeryparams, {
+				method: 'GET',
+				headers: {
+					'Authorization': 'Bearer ' + this.ologinresponse.access_token
+				}
+			});
+			if (!response.ok) {
+				throw new Error(await response.text());
 			}
-		});
-		const oresponse = await response.json();
-		return oresponse;
+			const oresponse = await response.json();
+			return oresponse;
+		} catch (e) {
+			throw new Error(e.message);
+		}
 	}
 
 	async doGetParFaturamento(filial_par, codigo) {
-		const response = await fetch(this.address + '/api/par/faturamentos/' + filial_par + '/' + codigo, {
-			method: 'GET',
-			headers: {
-				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+		try {
+			const response = await fetch(this.address + '/api/par/faturamentos/' + filial_par + '/' + codigo, {
+				method: 'GET',
+				headers: {
+					'Authorization': 'Bearer ' + this.ologinresponse.access_token
+				}
+			});
+			if (!response.ok) {
+				throw new Error(await response.text());
 			}
-		});
-		const oresponse = await response.json();
-		return oresponse;
+			const oresponse = await response.json();
+			return oresponse;
+		} catch (e) {
+			throw new Error(e.message);
+		}
 	}
 
 	async doSearchBasAlmoxarifado(search = '', page = null, per_page = null) {
@@ -228,14 +277,21 @@ export class InspireXApi {
 		if (squeryparams != '') {
 			squeryparams = '?' + squeryparams;
 		}
-		const response = await fetch(this.address + '/api/bas/almoxarifados' + squeryparams, {
-			method: 'GET',
-			headers: {
-				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+		try {
+			const response = await fetch(this.address + '/api/bas/almoxarifados' + squeryparams, {
+				method: 'GET',
+				headers: {
+					'Authorization': 'Bearer ' + this.ologinresponse.access_token
+				}
+			});
+			if (!response.ok) {
+				throw new Error(await response.text());
 			}
-		});
-		const oresponse = await response.json();
-		return oresponse;
+			const oresponse = await response.json();
+			return oresponse;
+		} catch (e) {
+			throw new Error(e.message);
+		}
 	}
 
 	async doSearchBasAlmoxarifadoByFilial(filial = 1, search = '', page = null, per_page = null) {
@@ -253,25 +309,39 @@ export class InspireXApi {
 		if (squeryparams != '') {
 			squeryparams = '?' + squeryparams;
 		}
-		const response = await fetch(this.address + '/api/bas/almoxarifados/' + filial + squeryparams, {
-			method: 'GET',
-			headers: {
-				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+		try {
+			const response = await fetch(this.address + '/api/bas/almoxarifados/' + filial + squeryparams, {
+				method: 'GET',
+				headers: {
+					'Authorization': 'Bearer ' + this.ologinresponse.access_token
+				}
+			});
+			if (!response.ok) {
+				throw new Error(await response.text());
 			}
-		});
-		const oresponse = await response.json();
-		return oresponse;
+			const oresponse = await response.json();
+			return oresponse;
+		} catch (e) {
+			throw new Error(e.message);
+		}
 	}
 
 	async doGetBasAlmoxarifado(filial, codigo) {
-		const response = await fetch(this.address + '/api/bas/almoxarifados/' + filial + '/' + codigo, {
-			method: 'GET',
-			headers: {
-				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+		try {
+			const response = await fetch(this.address + '/api/bas/almoxarifados/' + filial + '/' + codigo, {
+				method: 'GET',
+				headers: {
+					'Authorization': 'Bearer ' + this.ologinresponse.access_token
+				}
+			});
+			if (!response.ok) {
+				throw new Error(await response.text());
 			}
-		});
-		const oresponse = await response.json();
-		return oresponse;
+			const oresponse = await response.json();
+			return oresponse;
+		} catch (e) {
+			throw new Error(e.message);
+		}
 	}
 
 	async doSearchParEstoque(search = '', page = null, per_page = null) {
@@ -289,27 +359,41 @@ export class InspireXApi {
 		if (squeryparams != '') {
 			squeryparams = '?' + squeryparams;
 		}
-		//console.log(squeryparams);
-		//const response = await fetch(INSPIRE_API_CONSTS.address + '/api/pro/produtos' + squeryparams, {
-		const response = await fetch(this.address + '/api/par/estoques' + squeryparams, {
-			method: 'GET',
-			headers: {
-				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+		try {
+			//console.log(squeryparams);
+			//const response = await fetch(INSPIRE_API_CONSTS.address + '/api/pro/produtos' + squeryparams, {
+			const response = await fetch(this.address + '/api/par/estoques' + squeryparams, {
+				method: 'GET',
+				headers: {
+					'Authorization': 'Bearer ' + this.ologinresponse.access_token
+				}
+			});
+			if (!response.ok) {
+				throw new Error(await response.text());
 			}
-		});
-		const oresponse = await response.json();
-		return oresponse;
+			const oresponse = await response.json();
+			return oresponse;
+		} catch (e) {
+			throw new Error(e.message);
+		}
 	}
 
 	async doGetParEstoque(filial) {
-		const response = await fetch(this.address + '/api/par/estoques/' + filial, {
-			method: 'GET',
-			headers: {
-				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+		try {
+			const response = await fetch(this.address + '/api/par/estoques/' + filial, {
+				method: 'GET',
+				headers: {
+					'Authorization': 'Bearer ' + this.ologinresponse.access_token
+				}
+			});
+			if (!response.ok) {
+				throw new Error(await response.text());
 			}
-		});
-		const oresponse = await response.json();
-		return oresponse;
+			const oresponse = await response.json();
+			return oresponse;
+		} catch (e) {
+			throw new Error(e.message);
+		}
 	}
 
 	async doSearchBasTipoMov(search = '', page = null, per_page = null) {
@@ -327,25 +411,39 @@ export class InspireXApi {
 		if (squeryparams != '') {
 			squeryparams = '?' + squeryparams;
 		}
-		const response = await fetch(this.address + '/api/bas/tipomovs' + squeryparams, {
-			method: 'GET',
-			headers: {
-				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+		try {
+			const response = await fetch(this.address + '/api/bas/tipomovs' + squeryparams, {
+				method: 'GET',
+				headers: {
+					'Authorization': 'Bearer ' + this.ologinresponse.access_token
+				}
+			});
+			if (!response.ok) {
+				throw new Error(await response.text());
 			}
-		});
-		const oresponse = await response.json();
-		return oresponse;
+			const oresponse = await response.json();
+			return oresponse;
+		} catch (e) {
+			throw new Error(e.message);
+		}
 	}
 
 	async doGetBasTipoMov(codigo) {
-		const response = await fetch(this.address + '/api/bas/tipomovs/' + codigo, {
-			method: 'GET',
-			headers: {
-				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+		try {
+			const response = await fetch(this.address + '/api/bas/tipomovs/' + codigo, {
+				method: 'GET',
+				headers: {
+					'Authorization': 'Bearer ' + this.ologinresponse.access_token
+				}
+			});
+			if (!response.ok) {
+				throw new Error(await response.text());
 			}
-		});
-		const oresponse = await response.json();
-		return oresponse;
+			const oresponse = await response.json();
+			return oresponse;
+		} catch (e) {
+			throw new Error(e.message);
+		}
 	}
 
 	async doSearchStqLoteSequencia(search = '', page = null, per_page = null) {
@@ -363,25 +461,39 @@ export class InspireXApi {
 		if (squeryparams != '') {
 			squeryparams = '?' + squeryparams;
 		}
-		const response = await fetch(this.address + '/api/stq/lote/sequencias' + squeryparams, {
-			method: 'GET',
-			headers: {
-				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+		try {
+			const response = await fetch(this.address + '/api/stq/lote/sequencias' + squeryparams, {
+				method: 'GET',
+				headers: {
+					'Authorization': 'Bearer ' + this.ologinresponse.access_token
+				}
+			});
+			if (!response.ok) {
+				throw new Error(await response.text());
 			}
-		});
-		const oresponse = await response.json();
-		return oresponse;
+			const oresponse = await response.json();
+			return oresponse;
+		} catch (e) {
+			throw new Error(e.message);
+		}
 	}
 
 	async doGetStqLoteSequencia(filial, sequencia) {
-		const response = await fetch(this.address + '/api/stq/lote/sequencias/' + filial + '/' + sequencia, {
-			method: 'GET',
-			headers: {
-				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+		try {
+			const response = await fetch(this.address + '/api/stq/lote/sequencias/' + filial + '/' + sequencia, {
+				method: 'GET',
+				headers: {
+					'Authorization': 'Bearer ' + this.ologinresponse.access_token
+				}
+			});
+			if (!response.ok) {
+				throw new Error(await response.text());
 			}
-		});
-		const oresponse = await response.json();
-		return oresponse;
+			const oresponse = await response.json();
+			return oresponse;
+		} catch (e) {
+			throw new Error(e.message);
+		}
 	}
 
 	async doSearchStqSaldoEstoque(search = '', page = null, per_page = null) {
@@ -399,25 +511,39 @@ export class InspireXApi {
 		if (squeryparams != '') {
 			squeryparams = '?' + squeryparams;
 		}
-		const response = await fetch(this.address + '/api/stq/saldo/estoques' + squeryparams, {
-			method: 'GET',
-			headers: {
-				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+		try {
+			const response = await fetch(this.address + '/api/stq/saldo/estoques' + squeryparams, {
+				method: 'GET',
+				headers: {
+					'Authorization': 'Bearer ' + this.ologinresponse.access_token
+				}
+			});
+			if (!response.ok) {
+				throw new Error(await response.text());
 			}
-		});
-		const oresponse = await response.json();
-		return oresponse;
+			const oresponse = await response.json();
+			return oresponse;
+		} catch (e) {
+			throw new Error(e.message);
+		}
 	}
 
 	async doGetStqSaldoEstoque(filial_stq, almoxarifado, filial_pro, produto, data, sequencia_lote) {
-		const response = await fetch(this.address + '/api/stq/saldo/estoques/' + filial_stq + '/' + almoxarifado + '/' + filial_pro + '/' + produto + '/' + data + '/' + sequencia_lote, {
-			method: 'GET',
-			headers: {
-				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+		try {
+			const response = await fetch(this.address + '/api/stq/saldo/estoques/' + filial_stq + '/' + almoxarifado + '/' + filial_pro + '/' + produto + '/' + data + '/' + sequencia_lote, {
+				method: 'GET',
+				headers: {
+					'Authorization': 'Bearer ' + this.ologinresponse.access_token
+				}
+			});
+			if (!response.ok) {
+				throw new Error(await response.text());
 			}
-		});
-		const oresponse = await response.json();
-		return oresponse;
+			const oresponse = await response.json();
+			return oresponse;
+		} catch (e) {
+			throw new Error(e.message);
+		}
 	}
 
 	async doSearchStqSaldoEstoqueAtual(search = '', page = null, per_page = null) {
@@ -435,25 +561,39 @@ export class InspireXApi {
 		if (squeryparams != '') {
 			squeryparams = '?' + squeryparams;
 		}
-		const response = await fetch(this.address + '/api/stq/saldo/estoque/atuais' + squeryparams, {
-			method: 'GET',
-			headers: {
-				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+		try {
+			const response = await fetch(this.address + '/api/stq/saldo/estoque/atuais' + squeryparams, {
+				method: 'GET',
+				headers: {
+					'Authorization': 'Bearer ' + this.ologinresponse.access_token
+				}
+			});
+			if (!response.ok) {
+				throw new Error(await response.text());
 			}
-		});
-		const oresponse = await response.json();
-		return oresponse;
+			const oresponse = await response.json();
+			return oresponse;
+		} catch (e) {
+			throw new Error(e.message);
+		}
 	}
 
 	async doGetStqSaldoEstoqueAtual(filial_stq, almoxarifado, filial_pro, produto, sequencia_lote) {
-		const response = await fetch(this.address + '/api/stq/saldo/estoque/atuais/' + filial_stq + '/' + almoxarifado + '/' + filial_pro + '/' + produto + '/' + sequencia_lote, {
-			method: 'GET',
-			headers: {
-				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+		try {
+			const response = await fetch(this.address + '/api/stq/saldo/estoque/atuais/' + filial_stq + '/' + almoxarifado + '/' + filial_pro + '/' + produto + '/' + sequencia_lote, {
+				method: 'GET',
+				headers: {
+					'Authorization': 'Bearer ' + this.ologinresponse.access_token
+				}
+			});
+			if (!response.ok) {
+				throw new Error(await response.text());
 			}
-		});
-		const oresponse = await response.json();
-		return oresponse;
+			const oresponse = await response.json();
+			return oresponse;
+		} catch (e) {
+			throw new Error(e.message);
+		}
 	}
 
 	async doSearchStqMovEstoque(search = '', page = null, per_page = null) {
@@ -471,69 +611,111 @@ export class InspireXApi {
 		if (squeryparams != '') {
 			squeryparams = '?' + squeryparams;
 		}
-		const response = await fetch(this.address + '/api/stq/mov/estoques' + squeryparams, {
-			method: 'GET',
-			headers: {
-				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+		try {
+			const response = await fetch(this.address + '/api/stq/mov/estoques' + squeryparams, {
+				method: 'GET',
+				headers: {
+					'Authorization': 'Bearer ' + this.ologinresponse.access_token
+				}
+			});
+			if (!response.ok) {
+				throw new Error(await response.text());
 			}
-		});
-		const oresponse = await response.json();
-		return oresponse;
+			const oresponse = await response.json();
+			return oresponse;
+		} catch (e) {
+			throw new Error(e.message);
+		}
 	}
 
 	async doGetStqMovEstoque(filial_mov, sequencial) {
-		const response = await fetch(this.address + '/api/stq/mov/estoques/' + filial_mov + '/' + sequencial, {
-			method: 'GET',
-			headers: {
-				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+		try {
+			const response = await fetch(this.address + '/api/stq/mov/estoques/' + filial_mov + '/' + sequencial, {
+				method: 'GET',
+				headers: {
+					'Authorization': 'Bearer ' + this.ologinresponse.access_token
+				}
+			});
+			if (!response.ok) {
+				throw new Error(await response.text());
 			}
-		});
-		const oresponse = await response.json();
-		return oresponse;
+			const oresponse = await response.json();
+			return oresponse;
+		} catch (e) {
+			throw new Error(e.message);
+		}
 	}
 
 	async doInventarioProdutoStqMovEstoque(filial_mov, filial_pro, produto, almox_origem, sequencia_lote, data_movimento, hora_movimento, novo_saldo) {
-		const response = await fetch(this.address + '/api/stq/mov/estoques/inventario/produto/' + filial_mov + '/' + filial_pro + '/' + produto + '/' + almox_origem + '/' + sequencia_lote + '/' + data_movimento + '/' + hora_movimento + '/' + novo_saldo, {
-			method: 'POST',
-			headers: {
-				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+		try {
+			const response = await fetch(this.address + '/api/stq/mov/estoques/inventario/produto/' + filial_mov + '/' + filial_pro + '/' + produto + '/' + almox_origem + '/' + sequencia_lote + '/' + data_movimento + '/' + hora_movimento + '/' + novo_saldo, {
+				method: 'POST',
+				headers: {
+					'Authorization': 'Bearer ' + this.ologinresponse.access_token
+				}
+			});
+			if (!response.ok) {
+				throw new Error(await response.text());
 			}
-		});
-		const oresponse = await response.json();
-		return oresponse;
+			const oresponse = await response.json();
+			return oresponse;
+		} catch (e) {
+			throw new Error(e.message);
+		}
 	}
 
 	async doInventarioProdutoNowStqMovEstoque(filial_mov, filial_pro, produto, almox_origem, sequencia_lote, novo_saldo) {
-		const response = await fetch(this.address + '/api/stq/mov/estoques/inventario/produto/' + filial_mov + '/' + filial_pro + '/' + produto + '/' + almox_origem + '/' + sequencia_lote + '/' + novo_saldo, {
-			method: 'POST',
-			headers: {
-				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+		try {
+			const response = await fetch(this.address + '/api/stq/mov/estoques/inventario/produto/' + filial_mov + '/' + filial_pro + '/' + produto + '/' + almox_origem + '/' + sequencia_lote + '/' + novo_saldo, {
+				method: 'POST',
+				headers: {
+					'Authorization': 'Bearer ' + this.ologinresponse.access_token
+				}
+			});
+			if (!response.ok) {
+				throw new Error(await response.text());
 			}
-		});
-		const oresponse = await response.json();
-		return oresponse;
+			const oresponse = await response.json();
+			return oresponse;
+		} catch (e) {
+			throw new Error(e.message);
+		}
 	}
 
 	async doFnc_fnc_busca_preco_medio_s_icms_data(var_filial_stq, var_filial_pro, var_produto, var_almoxarifado, data_saldo, var_seq_lote) {
-		const response = await fetch(this.address + '/api/fnc/fnc_busca_preco_medio_s_icms_data/' + var_filial_stq + '/' + var_filial_pro + '/' + var_produto + '/' + var_almoxarifado + '/' + data_saldo + '/' + var_seq_lote, {
-			method: 'GET',
-			headers: {
-				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+		try {
+			const response = await fetch(this.address + '/api/fnc/fnc_busca_preco_medio_s_icms_data/' + var_filial_stq + '/' + var_filial_pro + '/' + var_produto + '/' + var_almoxarifado + '/' + data_saldo + '/' + var_seq_lote, {
+				method: 'GET',
+				headers: {
+					'Authorization': 'Bearer ' + this.ologinresponse.access_token
+				}
+			});
+			if (!response.ok) {
+				throw new Error(await response.text());
 			}
-		});
-		const oresponse = await response.json();
-		return oresponse;
+			const oresponse = await response.json();
+			return oresponse;
+		} catch (e) {
+			throw new Error(e.message);
+		}
 	}
 
 	async doFetchReportTotalDeVendasDoDia(dia) {
-		const response = await fetch(this.address + '/api/view/vnd/padrao/totalvendasdia' + (dia == null ? '' : '/' + dia), {
-			method: 'GET',
-			headers: {
-				'Authorization': 'Bearer ' + this.ologinresponse.access_token
+		try {
+			const response = await fetch(this.address + '/api/view/vnd/padrao/totalvendasdia' + (dia == null ? '' : '/' + dia), {
+				method: 'GET',
+				headers: {
+					'Authorization': 'Bearer ' + this.ologinresponse.access_token
+				}
+			});
+			if (!response.ok) {
+				throw new Error(await response.text());
 			}
-		});
-		const oresponse = await response.json();
-		return oresponse;
+			const oresponse = await response.json();
+			return oresponse;
+		} catch (e) {
+			throw new Error(e.message);
+		}
 	}
 
 	getLoginResponse() {
