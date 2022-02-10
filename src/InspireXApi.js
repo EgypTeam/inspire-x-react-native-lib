@@ -94,6 +94,21 @@ export class InspireXApi {
 		}
 	}
 
+	async goGetUsuarioByEmail(email) {
+		try {
+			const response = await fetch(this.address + '/api/ctl/usuarios/' + email, {
+				method: 'GET',
+				headers: {
+					'Authorization': 'Bearer ' + this.ologinresponse.access_token
+				}
+			});
+			const oresponse = await response.json();
+			return oresponse;
+		} catch (e) {
+			throw new Error(e.message);
+		}
+	}
+
 	async doFetchProdutos(search = '', page = null, per_page = null) {
 		var aqueryparams = [];
 		if (page != null) {
@@ -155,6 +170,22 @@ export class InspireXApi {
 			if (!response.ok) {
 				throw new Error(await response.text());
 			}
+			const oresponse = await response.json();
+			return oresponse;
+		} catch (e) {
+			throw new Error(e.message);
+		}
+	}
+
+	async doGetProProdutoByBarras(filial = 0, search = '') {
+		try {
+			//const response = await fetch(INSPIRE_API_CONSTS.address + '/api/pro/produtos' + squeryparams, {
+			const response = await fetch(this.address + '/api/pro/produtos/barras/' + filial + '/' + search, {
+				method: 'GET',
+				headers: {
+					'Authorization': 'Bearer ' + this.ologinresponse.access_token
+				}
+			});
 			const oresponse = await response.json();
 			return oresponse;
 		} catch (e) {
